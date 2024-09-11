@@ -28,7 +28,6 @@ describe('UserAccount', () => {
         expect(button).toBeInTheDocument();
         expect(button).toHaveTextContent(/edit/i);
     });
-    
     it('should not render the button if user is not ad admin', () => {
         const user = {
             id: 2,
@@ -38,5 +37,4 @@ describe('UserAccount', () => {
 
         expect(screen.getByText(user.name)).toBeInTheDocument();
     });
-
 })
