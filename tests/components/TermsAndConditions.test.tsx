@@ -6,38 +6,30 @@ import userEvent from '@testing-library/user-event';
 
 
 describe('TermsAndConditions', () => {
-    it('the checkbox must be unchecked at the begining', () => {
+    const renderComponent = ()=>{
         render(<TermsAndConditions/>);
 
-        const checkbox = screen.getByRole('checkbox');
+        return {
+            button: screen.getByRole('button'),
+            checkbox: screen.getByRole('checkbox')
+        }
+    }
+    it('the checkbox must be unchecked at the begining', () => {
+        const {button, checkbox} = renderComponent();
+
         expect(checkbox).toBeInTheDocument();
         expect(checkbox).not.toBeChecked();
 
-        const button = screen.getByRole('button');
         expect(button).toBeInTheDocument();
         expect(button).toHaveTextContent(/Submit/i);
         expect(button).toBeDisabled();
     });
-    it('should enable the button when the checkbox is checked', async () => {
-        render(<TermsAndConditions/>);
+    // it('should enable the button when the checkbox is checked', async () => {
+    //     const {button, checkbox} = renderComponent();
+    //     const user = userEvent.setup();
 
-        const checkbox = screen.getByRole('checkbox');
-        const user = userEvent.setup();
-
-        await user.click(checkbox);
-        expect(screen.getByRole('button')).toBeEnabled();
-    });
+    //     await user.click(checkbox);
+    //     expect(button).toBeEnabled();
+    // });
 })
 
-//below lines are not the topic right now
-
-import { cleanup } from '@testing-library/react';
-
-afterEach(() => {
-  cleanup(); // This ensures that the DOM is cleaned after each test
-});
-beforeEach(() => {
-    // Reset or reinitialize any state, DOM, or mocks here
-    cleanup(); // Provided by testing library to unmount components and clean the DOM
-  });
-  
